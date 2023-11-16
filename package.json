@@ -1,18 +1,20 @@
 {
-  "name": "express",
-  "version": "1.0.0",
-  "description": "My first Express.js application",
-  "main": "index.js",
+  "name": "express1---copy",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www",
+    "dev":"npx nodemon ./bin/www"
   },
-  "keywords": [
-    "test",
-    "express"
-  ],
-  "author": "leonardo.gasparic12@gmail.com",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

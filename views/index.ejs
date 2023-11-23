@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Dobrodošli na: <%= title %></p>
+<%- include("header") %>
 
-
-  </body>
-</html>
+<div class="hero min-h-screen bg-base-200">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">Dobrodošli na naslovnicu</h1>
+        <p class="py-6">Pritiskom na gumb možete se prijaviti u aplikaciju!</p>
+        <a class="btn btn-primary" href="/users/signin">Prijava</a>
+      </div>
+    </div>
+  </div>
+<%- include("footer") %>

@@ -1,5 +1,5 @@
 {
-  "name": "express1---copy",
+  "name": "express2",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -8,11 +8,13 @@
     "tw": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/style.css --watch"
   },
   "dependencies": {
+    "better-sqlite3": "^9.2.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
     "http-errors": "~1.6.3",
+    "joi": "^17.11.0",
     "morgan": "~1.9.1"
   },
   "devDependencies": {

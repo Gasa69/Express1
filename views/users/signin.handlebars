@@ -1,0 +1,36 @@
+<div class="hero min-h-screen bg-base-200">
+    <div class="hero-content text-center">
+        <div class="max-w-md">
+            <h1 class="text-5xl font-bold">Prijava korisnika</h1>
+            <form method="post" action="/users/signin">
+
+                <div class="py-6">
+                    <div>
+                        <label class="form-control w-full max-w-xs">
+                            <div class="label">
+                                <span class="label-text">E-mail adresa</span>
+
+                            </div>
+                            <input type="email" name="email" placeholder="Unesite svoju e-mail adresu"
+                                class="input input-bordered w-full max-w-xs" required="" />
+
+                        </label>
+                    </div>
+                    <div>
+                        <label class="form-control w-full max-w-xs">
+                            <div class="label">
+                                <span class="label-text">Zaporka</span>
+
+                            </div>
+                            <input type="password" name="password" placeholder="Unesite svoju zaporku"
+                                class="input input-bordered w-full max-w-xs" required="" />
+
+                        </label>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Potvrdi" />
+                <input type="reset" class="btn btn-neutral" value="Poništi" />
+            </form>
+        </div>
+    </div>
+</div>

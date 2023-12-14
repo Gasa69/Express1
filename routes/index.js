@@ -1,8 +1,14 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const {checkAuthCookie} = require("../services/auth.js");
 
-router.get('/', function(req, res, next) {
-  res.render('index');
+// GET /
+router.get("/", function(req, res, next) {
+  res.render("index");
+});
+
+router.get("/protected", checkAuthCookie, function(req, res, next) {
+  res.send("send");
 });
 
 module.exports = router;

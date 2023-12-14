@@ -1,36 +1,64 @@
 <div class="hero min-h-screen bg-base-200">
-    <div class="hero-content text-center">
+    <div class="hero-content">
         <div class="max-w-md">
             <h1 class="text-5xl font-bold">Prijava korisnika</h1>
-            <form method="post" action="/users/signin">
 
+            {{#if result.display_form}}
+            <form method="post" action="/users/signin">
                 <div class="py-6">
                     <div>
                         <label class="form-control w-full max-w-xs">
                             <div class="label">
                                 <span class="label-text">E-mail adresa</span>
-
                             </div>
-                            <input type="email" name="email" placeholder="Unesite svoju e-mail adresu"
+                            <input type="email" name="email" placeholder="Upišite svoju e-mail adresu"
                                 class="input input-bordered w-full max-w-xs" required="" />
-
                         </label>
                     </div>
                     <div>
                         <label class="form-control w-full max-w-xs">
                             <div class="label">
                                 <span class="label-text">Zaporka</span>
-
                             </div>
-                            <input type="password" name="password" placeholder="Unesite svoju zaporku"
-                                class="input input-bordered w-full max-w-xs" required="" />
-
+                            <input type="password" name="password" placeholder="Upišite svoju zaporku"
+                                class="input input-bordered w-full max-w-xs" />
                         </label>
                     </div>
                 </div>
                 <input type="submit" class="btn btn-primary" value="Potvrdi" />
                 <input type="reset" class="btn btn-neutral" value="Poništi" />
             </form>
+            {{/if}}
+
+            {{#if result.validation_error}}
+            <div class="mt-4">
+                <div class="card w-96 bg-error text-black">
+                    <div class="card-body">
+                        <h2 class="card-title">Greška!</h2>
+                        <p>
+                            Dogodila se greška prilikom provjere podataka, provjerite svoj unos
+                            i pokušajte ponovno!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if result.success}}
+            <div class="mt-4">
+                <div class="card w-96 bg-primary text-primary-content">
+                    <div class="card-body">
+                        <h2 class="card-title">Uspješno!</h2>
+                        <p>
+                            Uspješno ste se prijavili, možete nastaviti s radom!
+                        </p>
+                        <div class="card-actions justify-end">
+                            <a class="btn" href="/">Nastavite na naslovnicu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
         </div>
     </div>
 </div>

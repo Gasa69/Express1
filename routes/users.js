@@ -3,10 +3,12 @@ const router = express.Router();
 const Joi = require("joi");
 const { db } = require("../services/db.js");
 const { getUserJwt } = require("../services/auth.js");
-  // GET /users/signin
-  router.get("/signin", function (req, res, next) {
-    res.render("users/signin", { result: { display_form: true } });
-  });
+const bcrypt = require("bcrypt");
+
+// GET /users/signin
+router.get("/signin", function (req, res, next) {
+  res.render("users/signin", { result: { display_form: true } });
+});
 
 // SCHEMA signin
 const schema_signin = Joi.object({
@@ -17,7 +19,7 @@ const schema_signin = Joi.object({
 // POST /users/signin
 router.post("/signin", function (req, res, next) {
   // do validation
-  const result = schema_signin.validate(req.body);
+  const result = schema_signup.validate(req.body);
   if (result.error) {
     res.render("users/signin", { result: { validation_error: true, display_form: true } });
     return;
@@ -34,11 +36,41 @@ router.post("/signin", function (req, res, next) {
     const token = getUserJwt(dbResult.id, dbResult.email, dbResult.name, dbResult.role);
     console.log("NEWTOKEN", token);
     res.cookie("auth", token);
-    //spremamo JWT u cookie 
-
 
     res.render("users/signin", { result: { success: true } });
+  } else {
+    res.render("users/signin", { result: { invalid_credentials: true } });
+
   }
 });
+
+// SCHEMA signin
+const schema_signup = Joi.object({
+  name: Joi.string().min(3).max(50).required(),
+  email: Joi.string().email().max(50).required(),
+  password: Joi.string().min(3).max(50).required(),
+  password_check: Joi.ref("password")
+});
+
+// GET /users/signup
+router.get("/signup", function (req, res, next) {
+  res.render("users/signup", { result: { display_form: true } });
+});
+
+// POST /users/signup
+router.post("/signup", function (req, res, next) {
+  // do validation
+  const result = schema_signup.validate(req.body);
+  if (result.error) {
+    res.render("users/signup", { result: { validation_error: true, display_form: true } });
+    return;
+  }
+
+const passwordHash = bcrypt.hashSync (rew.body.password, 10);
+
+console.log ("DATA", req.body);
+
+});
+
 
 module.exports = router;

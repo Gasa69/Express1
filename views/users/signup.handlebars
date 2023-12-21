@@ -1,17 +1,26 @@
 <div class="hero min-h-screen bg-base-200">
     <div class="hero-content">
         <div class="max-w-md">
-            <h1 class="text-5xl font-bold">Prijava korisnika</h1>
+            <h1 class="text-5xl font-bold">Registracija korisnika</h1>
 
             {{#if result.display_form}}
-            <form method="post" action="/users/signin">
+            <form method="post" action="/users/signup">
                 <div class="py-6">
                     <div>
                         <label class="form-control w-full max-w-xs">
                             <div class="label">
-                                <span class="label-text">E-mail adresa</span>
+                                <span class="label-text">Ime i prezime</span>
                             </div>
-                            <input type="email" name="email" placeholder="Upišite svoju e-mail adresu"
+                            <input type="text" name="name" placeholder="Upišite svoje ime i prezime"
+                                class="input input-bordered w-full max-w-xs" required="" />
+                        </label>
+                    </div>
+                    <div>
+                        <label class="form-control w-full max-w-xs">
+                            <div class="label">
+                                <span class="label-text"><E-mail>E-mail adresa</E-mail></span>
+                            </div>
+                            <input type="email" name="e-mail" placeholder="Upišite svoju e-mail adresu"
                                 class="input input-bordered w-full max-w-xs" required="" />
                         </label>
                     </div>
@@ -21,6 +30,15 @@
                                 <span class="label-text">Zaporka</span>
                             </div>
                             <input type="password" name="password" placeholder="Upišite svoju zaporku"
+                                class="input input-bordered w-full max-w-xs" />
+                        </label>
+                    </div>
+                    <div>
+                        <label class="form-control w-full max-w-xs">
+                            <div class="label">
+                                <span class="label-text">Potvrda zaporke</span>
+                            </div>
+                            <input type="password" name="password_check" placeholder="Ponovite svoju zaporku"
                                 class="input input-bordered w-full max-w-xs" />
                         </label>
                     </div>
@@ -68,10 +86,10 @@
                     <div class="card-body">
                         <h2 class="card-title">Uspješno!</h2>
                         <p>
-                            Uspješno ste se prijavili, možete nastaviti s radom!
+                            Uspješno ste se registrirali, možete nastaviti s radom!
                         </p>
                         <div class="card-actions justify-end">
-                            <a class="btn" href="/">Nastavite na naslovnicu</a>
+                            <a class="btn" href="/users/signup">Nastavite na naslovnicu</a>
                         </div>
                     </div>
                 </div>

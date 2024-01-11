@@ -8,9 +8,9 @@
     "tw": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/style.css --watch"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "better-sqlite3": "^9.2.2",
     "cookie-parser": "~1.4.4",
-    "crypt": "^0.0.2",
     "debug": "~2.6.9",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",

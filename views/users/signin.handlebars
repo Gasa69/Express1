@@ -44,34 +44,30 @@
             </div>
             {{/if}}
 
-
-
-
-
             {{#if result.invalid_credentials}}
             <div class="mt-4">
                 <div class="card w-96 bg-error text-black">
                     <div class="card-body">
                         <h2 class="card-title">Greška!</h2>
                         <p>
-                            Dogodila se greška prilikom prijave korisnika, pogrešna e-mail adresa i/ili zaporka
+                            Dogodila se greška prilikom prijave korisnika, pogrešna e-mail adresa
+                            i/ili zaporka.
                         </p>
                     </div>
                 </div>
             </div>
             {{/if}}
 
-
             {{#if result.success}}
             <div class="mt-4">
                 <div class="card w-96 bg-primary text-primary-content">
                     <div class="card-body">
-                        <h2 class="card-title">Uspješno!</h2>
+                        <h2 class="card-title">Uspjeh!</h2>
                         <p>
                             Uspješno ste se prijavili, možete nastaviti s radom!
                         </p>
                         <div class="card-actions justify-end">
-                            <a class="btn" href="/">Nastavite na naslovnicu</a>
+                            <a class="btn" href="/">Nastavi na naslovnicu</a>
                         </div>
                     </div>
                 </div>

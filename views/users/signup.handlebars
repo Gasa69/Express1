@@ -62,19 +62,6 @@
             </div>
             {{/if}}
 
-            {{#if result.email_in_use}}
-            <div class="mt-4">
-                <div class="card w-96 bg-error text-black">
-                    <div class="card-body">
-                        <h2 class="card-title">Greška!</h2>
-                        <p>
-                            E-mail adresa koju ste upisali je u upotrebi!
-                        </p>
-                    </div>
-                </div>
-            </div>
-            {{/if}}
-
             {{#if result.database_error}}
             <div class="mt-4">
                 <div class="card w-96 bg-error text-black">
@@ -82,6 +69,19 @@
                         <h2 class="card-title">Greška!</h2>
                         <p>
                             Dogodila se greška prilikom spremanja podataka, kontaktirajte administratora!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if result.email_in_use}}
+            <div class="mt-4">
+                <div class="card w-96 bg-error text-black">
+                    <div class="card-body">
+                        <h2 class="card-title">Greška!</h2>
+                        <p>
+                            E-mail adresa koju ste upisali je već u upotrebi!
                         </p>
                     </div>
                 </div>

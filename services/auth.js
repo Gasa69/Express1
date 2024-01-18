@@ -20,24 +20,29 @@ function getUserJwt(id, email, name, role, expDays = 7) {
     return token;
 }
 
-// MIDDLEWARE FOR AUTH COOKIE CHECK
-function checkAuthCookie(req, res, next) {
-    const token = req.cookies["auth"];
+// MIDDLEWARE FOR PARSING AUTH COOKIE
+function parseAuthCookie(req, res, next) {
+    const token = req.cookies[process.env.AUTH_COOKIE_KEY];
 
     let result = null;
     try {
         result = jwt.verify(token, JWT_SECRET_KEY);
     } catch (error) {
-        console.log("ERROR", error);
-        throw new Error("Potrebna je prijava u sustav.");
         next();
+        return;
     }
-
     req.user = result;
+    res.locals.user = result;
+    next();
+}
+// MIDDLEWARE FOR AUTHENTICATION CHECK
+function authRequired (req, res, next) {
+    if (!req.user) throw new Error ("Potrebna je prijava u sustav.");
     next();
 }
 
 module.exports = {
     getUserJwt,
-    checkAuthCookie
+    parseAuthCookie,
+    authRequired
 };

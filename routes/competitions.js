@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { checkAuthCookie } = require("../services/auth.js");
-router.get("/", function (req, res, next) {
+const { authRequired } = require("../services/auth.js");
+
+router.get("/", authRequired, function (req, res, next) {
     res.render("competitions/index");
 });
 

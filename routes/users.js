@@ -37,10 +37,11 @@ router.post("/signin", function (req, res, next) {
 
     if (!compareResult) {
       res.render("users/signin", { result: { invalid_credentials: true } });
+      return;
     }
 
     const token = getUserJwt(dbResult.id, dbResult.email, dbResult.name, dbResult.role);
-    res.cookie("auth", token);
+    res.cookie(process.env.AUTH_COOKIE_KEY, token);
 
     res.render("users/signin", { result: { success: true } });
   } else {
@@ -55,10 +56,14 @@ const schema_signup = Joi.object({
   password: Joi.string().min(3).max(50).required(),
   password_check: Joi.ref("password")
 });
+// GET /users/signout
+router.get("/signout", function (req, res, next) 
+  
 
-// GET /users/signup
-router.get("/signup", function (req, res, next) {
-  res.render("users/signup", { result: { display_form: true } });
+// GET /users/signout
+router.get("/signout", function (req, res, next) {
+  res.clearCookie(process.env.AUTH_COOKIE_KEY);
+  res.redirect("/");
 });
 
 // POST /users/signup
@@ -76,8 +81,6 @@ router.post("/signup", function (req, res, next) {
     res.render("users/signup", { result: { email_in_use: true, display_form: true } });
     return;
   }
-
-
 
   const passwordHash = bcrypt.hashSync(req.body.password, 10);
   const stmt2 = db.prepare("INSERT INTO users (email, password, name, signed_at, role) VALUES (?, ?, ?, ?, ?);");

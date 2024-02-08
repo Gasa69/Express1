@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html data-theme="synthwave">
+<html>
 
 <head>
     <title>Moja Express aplikacija</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
 <body>
@@ -13,7 +14,10 @@
             <a href="/competitions" class="btn btn-sm btn-accent">Natjecanja</a>
         </div>
         <div class="flex-none flex justify-end items-baseline gap-2">
-            <a href="/users/data" class="btn btn-sm btn-secondary">{{user.name}}</a>
+            <a href="/users/data" class="btn btn-sm btn-secondary">
+            {{user.name}}
+            {{#if user.is_admin}}*{{/if}}
+            </a>
             <a href="/users/signout" class="btn btn-sm btn-accent">Odjava</a>
         </div>
     </div>

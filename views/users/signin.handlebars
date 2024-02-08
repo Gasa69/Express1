@@ -31,17 +31,7 @@
             {{/if}}
 
             {{#if result.validation_error}}
-            <div class="mt-4">
-                <div class="card w-96 bg-error text-black">
-                    <div class="card-body">
-                        <h2 class="card-title">Greška!</h2>
-                        <p>
-                            Dogodila se greška prilikom provjere podataka, provjerite svoj unos
-                            i pokušajte ponovno!
-                        </p>
-                    </div>
-                </div>
-            </div>
+            {{> validation_error}}
             {{/if}}
 
             {{#if result.invalid_credentials}}

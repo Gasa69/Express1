@@ -15,7 +15,9 @@ const competitonsRouter = require('./routes/competitions');
 const app = express();
 
 // VIEW ENGINE SETUP
-app.engine('handlebars', engine());
+app.engine('handlebars', engine({
+  partialsDir: path.join(__dirname, '/views/partials')
+}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
@@ -43,9 +45,8 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-
   if (err.status === 404) {
-    res.locals.message = "Tražena stranica ne postoji.";
+    res.locals.message = "Tražena stranica ne postoji";
   }
 
   // render the error page

@@ -1,6 +1,7 @@
 <div class="p-2">
     {{#if result.display_form}}
-    <form method="post" action="/competitions/{{#if edit}}edit{{/if}}{{#unless result.edit}}add{{/unless}}" class="flex flex-col gap-2">
+    <form method="post" action="/competitions/{{#if result.edit}}edit{{/if}}{{#unless result.edit}}add{{/unless}}"
+        class="flex flex-col gap-2">
         <div class="pb-2 flex flex-col">
             <label>Naziv</label>
             <input type="text" name="name" class="bg-neutral" required="" minlength="3" maxlength="50" {{#if
@@ -8,45 +9,43 @@
         </div>
         <div class="pb-2 flex flex-col" x-data="{}">
             <label>Opis</label>
-            <textarea name="description" class="bg-neutral" rows="10" required="" minlength="3"{{#if 
-                result.edit}}x-text="'{{result.edit.description}}'" {{/if}}> 
-</textarea>
+            <textarea name="description" class="bg-neutral" rows="10" required="" minlength="3" {{#if
+                result.edit}}x-text="'{{result.edit.description}}'" {{/if}}>
+            </textarea>
         </div>
-</div>
-</div>
-<div class="pb-2 flex flex-col">
-    <label>Rok prijave</label>
-    <input type="datetime-local" name="apply_till" class="bg-neutral" required="" {{#if 
-                result.edit}}value="'{{result.edit.apply_till}}'" {{/if}}/> 
-</div>
-{{#if result.edit}}
-<input type="hiddden" name="id" value=""{{rsult.edit.id}}"/>
-{{/if}}
-{{> form_buttons }}
-</form>
-{{/if}}
+        <div class="pb-2 flex flex-col">
+            <label>Rok prijave</label>
+            <input type="datetime-local" name="apply_till" class="bg-neutral" required="" {{#if
+                result.edit}}value="{{result.edit.apply_till}}" {{/if}} />
+        </div>
+        {{#if result.edit}}
+        <input type="hidden" name="id" value="{{result.edit.id}}" />
+        {{/if}}
+        {{> form_buttons }}
+    </form>
+    {{/if}}
 
-{{#if result.validation_error}}
-{{> validation_error }}
-{{/if}}
+    {{#if result.validation_error}}
+    {{> validation_error }}
+    {{/if}}
 
-{{#if result.database_error}}
-{{> database_error}}
-{{/if}}
+    {{#if result.database_error}}
+    {{> database_error}}
+    {{/if}}
 
-{{#if result.success}}
-<div class="mt-4">
-    <div class="card w-96 bg-primary text-primary-content">
-        <div class="card-body">
-            <h2 class="card-title">Uspjeh!</h2>
-            <p>
-                Uspješno ste dodali novo natjecanje!
-            </p>
-            <div class="card-actions justify-end">
-                <a class="btn" href="/competitions">Nastavi na prikaz natjecanja</a>
+    {{#if result.success}}
+    <div class="mt-4">
+        <div class="card w-96 bg-primary text-primary-content">
+            <div class="card-body">
+                <h2 class="card-title">Uspjeh!</h2>
+                <p>
+                    Uspješno ste dodali novo natjecanje!
+                </p>
+                <div class="card-actions justify-end">
+                    <a class="btn" href="/competitions">Nastavi na prikaz natjecanja</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-{{/if}}
+    {{/if}}
 </div>

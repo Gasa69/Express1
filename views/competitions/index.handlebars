@@ -7,16 +7,14 @@
         <table class="table">
             <!-- head -->
             <thead>
-
                 <tr>
-                    <th></th>
+                    <th>ID</th>
                     <th>Ime</th>
                     <th>Opis</th>
                     <th>Rok prijave</th>
                     <th>Autor</th>
                     <th>Mogućnosti</th>
                 </tr>
-
             </thead>
             <!-- body -->
             <tbody>
@@ -26,16 +24,19 @@
                     <td>{{this.name}}</td>
                     <td>
                         <div class="line-clamp-2">
-                        {{this.description}}
+                            {{this.description}}
                         </div>
                     </td>
                     <td x-data="{}">
                         <span x-text="new Date('{{this.apply_till}}').toLocaleString()"></span>
-                        </td>
+                    </td>
                     <td>{{this.author}}</td>
                     <td class="flex flex-wrap gap-2">
+                        {{#if ../user.is_admin}}
                         <a href="/competitions/edit/{{this.id}}" class="btn btn-accent btn-xs">Uredi</a>
-                        <a href="/competitions/delete/{{this.id}}" class="btn btn-error btn-xs">Izbriši</a>
+                        <a href="/competitions/delete/{{this.id}}" class="btn btn-error btn-xs">Briši</a>
+                        {{/if}}
+                        <a href="/competitions/apply/{{this.id}}" class="btn btn-deafult btn-xs">Prijava</a>
                     </td>
                 </tr>
                 {{/each}}

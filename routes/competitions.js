@@ -4,6 +4,25 @@ const { authRequired, adminRequired } = require("../services/auth.js");
 const Joi = require("joi");
 const { db } = require("../services/db.js");
 
+//GET /applyfor
+router.get("/apply_for/:id", authRequired, function (req, res, next) {
+    // do validation
+    const result1 = schema_id.validate(req.params);
+    if (result1.error) {
+        throw new Error("Greška u prijavi");
+    }
+        const stmt = db.prepare(`
+        SELECT id, id_user, id_competitions, score, apply_time
+        FROM apply_for 
+        WHERE id_user = ? AND id_competitions = ?
+        `);
+        const result = stmt.get(req.user.sub);
+
+        res.render("competitions/apply_for", { result: { items: result } });
+    });
+
+
+    
 // GET /competitions
 router.get("/", authRequired, function (req, res, next) {
     const stmt = db.prepare(`
@@ -68,21 +87,21 @@ const schema_edit = Joi.object({
 
 // POST /competitions/edit
 router.post("/edit", adminRequired, function (req, res, next) {
-        // do validation
-        const result = schema_edit.validate(req.body);
-        if (result.error) {
-            res.render("competitions/form", { result: { validation_error: true, display_form: true } });
-            return;
-        }
+    // do validation
+    const result = schema_edit.validate(req.body);
+    if (result.error) {
+        res.render("competitions/form", { result: { validation_error: true, display_form: true } });
+        return;
+    }
 
-const stmt = db.prepare("UPDATE competitions SET name = ?, description = ?, apply_till = ? WHERE id = ?;");
-const updateResult = stmt.run(req.body.name, req.body.description, req.body.apply_till, req.body.id);
+    const stmt = db.prepare("UPDATE competitions SET name = ?, description = ?, apply_till = ? WHERE id = ?;");
+    const updateResult = stmt.run(req.body.name, req.body.description, req.body.apply_till, req.body.id);
 
-if (updateResult.changes && updateResult.changes === 1) {
-    res.redirect("/competitions");
-} else {
-    res.render("competitions/form", { result: { database_error: true } });
-}
+    if (updateResult.changes && updateResult.changes === 1) {
+        res.redirect("/competitions");
+    } else {
+        res.render("competitions/form", { result: { database_error: true } });
+    }
 });
 
 

@@ -34,9 +34,9 @@
                     <td class="flex flex-wrap gap-2">
                         {{#if ../user.is_admin}}
                         <a href="/competitions/edit/{{this.id}}" class="btn btn-accent btn-xs">Uredi</a>
-                        <a href="/competitions/delete/{{this.id}}" class="btn btn-error btn-xs">Briši</a>
+                        <a href="/competitions/delete/{{this.id}}" class="btn btn-error btn-xs">Izbriši</a>
                         {{/if}}
-                        <a href="/competitions/apply/{{this.id}}" class="btn btn-deafult btn-xs">Prijava</a>
+                        <a href="/competitions/apply_for/{{this.id}}" class="btn btn-deafult btn-xs">Prijava</a>
                     </td>
                 </tr>
                 {{/each}}

@@ -4,36 +4,33 @@ const { authRequired, adminRequired } = require("../services/auth.js");
 const Joi = require("joi");
 const { db } = require("../services/db.js");
 
-//GET /applyfor
-router.get("/apply_for/:id", authRequired, function (req, res, next) {
-    // do validation
+// GET /competitions/login/:id
+router.get("/competitions/login/:id", authRequired, function (req, res, next) {
+    // do validation 
     const result1 = schema_id.validate(req.params);
+
     if (result1.error) {
-        throw new Error("Greška u prijavi");
+        throw new Error("Greška");
     }
-        const stmt = db.prepare(`
-        SELECT id, id_user, id_competitions, score, apply_time
-        FROM apply_for 
-        WHERE id_user = ? AND id_competitions = ?
-        `);
-        const result = stmt.get(req.user.sub);
+    // PROVJERA 
+    const stmt = db.prepare("SELECT count(*) FROM login WHERE id_user = ? AND id_competition = ?;");
+    const checkResult1 = stmt.get(req.user.sub, req.params.id);
+    console.log(checkResult1);
 
-        res.render("competitions/apply_for", { result: { items: result } });
-    });
+    if (checkResult1["count(*)"] >= 1) {
+        res.render("competitions/form", { result: { database_error: true } });
+    }
+    else {
+        // UPIS 
+        const stmt = db.prepare("INSERT INTO login (id_user, id_competition) VALUES (?, ?);");
+        const updateResult = stmt.run(req.user.sub, req.params.id);
 
-
-    
-// GET /competitions
-router.get("/", authRequired, function (req, res, next) {
-    const stmt = db.prepare(`
-        SELECT c.id, c.name, c.description, u.name AS author, c.apply_till
-        FROM competitions c, users u
-        WHERE c.author_id = u.id
-        ORDER BY c.apply_till
-    `);
-    const result = stmt.all();
-
-    res.render("competitions/index", { result: { items: result } });
+        if (updateResult.changes && updateResult.changes === 1) {
+            res.render("competitions/index", { result: { items: result } });
+        } else {
+            res.render("competition/form", { result: { database_error: true } });
+        }
+    }
 });
 
 // SCHEMA id

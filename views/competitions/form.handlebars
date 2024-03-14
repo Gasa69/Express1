@@ -1,6 +1,6 @@
 <div class="p-2">
     {{#if result.display_form}}
-    <form method="post" action="/competitions/{{#if result.edit}}edit{{/if}}{{#unless result.edit}}add{{/unless}}"
+    <form action="/competitions/{{#if result.edit}}edit{{/if}}{{#unless result.edit}}add{{/unless}}" method="post"
         class="flex flex-col gap-2">
         <div class="pb-2 flex flex-col">
             <label>Naziv</label>
@@ -30,7 +30,7 @@
     {{/if}}
 
     {{#if result.database_error}}
-    {{> database_error}}
+    {{> database_error }}
     {{/if}}
 
     {{#if result.success}}
@@ -39,10 +39,26 @@
             <div class="card-body">
                 <h2 class="card-title">Uspjeh!</h2>
                 <p>
-                    Uspješno ste dodali novo natjecanje!
+                    Uspješno ste dodali natjecanje!
                 </p>
                 <div class="card-actions justify-end">
-                    <a class="btn" href="/competitions">Nastavi na prikaz natjecanja</a>
+                    <a class="btn" href="/competitions">Nastavi na pregled natjecanja</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if result.score_success}}
+    <div class="mt-4">
+        <div class="card w-96 bg-primary text-primary-content">
+            <div class="card-body">
+                <h2 class="card-title">Uspjeh!</h2>
+                <p>
+                    Uspješno ste promjenili broj bodova!
+                </p>
+                <div class="card-actions justify-end">
+                    <a class="btn" href="/competitions">Nastavi na pregled natjecanja</a>
                 </div>
             </div>
         </div>

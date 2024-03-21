@@ -31,7 +31,6 @@ router.get("/delete/:id", adminRequired, function (req, res, next) {
         throw new Error("Neispravan poziv");
     }
 
-    // ZADATAK 3
 
     const checkStmt1 = db.prepare("SELECT count(*) FROM login WHERE id_competition = ?");
     const checkResult1 = checkStmt1.get(req.params.id);

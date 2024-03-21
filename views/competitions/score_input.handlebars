@@ -1,17 +1,17 @@
 <div class="p-2">
     <div class="overflow-x-auto">
         <table class="table">
-           
+
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Korisnik</th>
                     <th>Natjecanje</th>
-                    <th>Trenutni bodovi </th>
+                    <th>Trenutni bodovi</th>
                     <th>Promjena bodova</th>
                 </tr>
             </thead>
-            
+
             <tbody>
 
                 {{#each result.items}}
@@ -24,8 +24,9 @@
                         <form method="post" action="/competitions/score_change" class="flex flex-col gap-2">
                             <div class="flex flex-col">
                                 <label>Bodovi</label>
-                                <input id="score" type="number" name="score" value="{{this.score}}" class="bg-neutral"/>
-                                <input type="hidden" name="id" value="{{this.login_id}}"/>
+                                <input id="score" type="number" name="score" value="{{this.score}}"
+                                    class="bg-neutral" />
+                                <input type="hidden" name="id" value="{{this.login_id}}" />
                                 {{> form_buttons }}
                             </div>
                     </td>

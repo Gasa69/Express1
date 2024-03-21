@@ -15,10 +15,12 @@
                     <th>Rok prijave</th>
                     <th>Autor</th>
                     {{#if user.is_admin}}
+                    <br> <br>
                     <th>Mogućnosti</th>
                     {{/if}}
                 </tr>
             </thead>
+
 
             <tbody>
 
@@ -38,12 +40,15 @@
                     {{#if ../user.is_admin}}
                     <td class="flex flex-wrap gap-2">
                         <a href="/competitions/edit/{{this.id}}" class="btn btn-accent btn-xs">Uredi</a>
-                        <a href="/competitions/delete/{{this.id}}" class="btn btn-error btn-xs">Briši</a>
+                        <a href="/competitions/delete/{{this.id}}" class="btn btn-error btn-xs">Izbriši</a>
                         <a href="/competitions/score_input/{{this.id}}" class="btn btn-accent btn-xs">Prikaz prijava</a>
+                        <a href="/competitions/leaderboard/{{this.id}}" class="btn default btn-xs">Izvješće
+                            natjecanja</a>
+
                     </td>
                     {{/if}}
                     <td class="flex-none">
-                        <a href="/competitions/login/{{this.id}}" class="btn btn-primary">Prijavi natjecanje</a>
+                        <a href="/competitions/login/{{this.id}}" class="btn btn-primary">Prijavi</a>
                     </td>
                 </tr>
                 {{/each}}

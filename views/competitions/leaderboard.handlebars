@@ -1,0 +1,33 @@
+<div class="min-h-screen">
+    <div class="hero-content text-center">
+        <div class="max-w-md">
+            <h1 class="text-5xl font-bold">{{#each data.items}}{{natjecanje}}{{/each}}</h1>
+            <p class="py-6" x-data="{}"><span
+                    x-text="new Date('{{#each data.items}}{{datum}}{{/each}}').toLocaleString()"></span></p>
+            <h2 class="text-xl font-bold">Tablica Poretka</h2>
+            <div class="overflow-x-auto">
+                <table class="table">
+
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Ime</th>
+                            <th>Bodovi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {{#each result.items}}
+                        <tr>
+                            <th x-data="{}"><span x-text="{{@index}}+1"></span></th>
+                            <td>{{this.natjecatelj}}</td>
+                            <td>{{this.score}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

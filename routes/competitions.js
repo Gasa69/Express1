@@ -31,6 +31,8 @@ router.get("/delete/:id", adminRequired, function (req, res, next) {
         throw new Error("Neispravan poziv");
     }
 
+    // ZADATAK 3
+
     const checkStmt1 = db.prepare("SELECT count(*) FROM login WHERE id_competition = ?");
     const checkResult1 = checkStmt1.get(req.params.id);
 
@@ -130,7 +132,6 @@ router.post("/add", adminRequired, function (req, res, next) {
     }
 });
 
-// ZADATAK 1
 
 // GET /competitions/login/:id
 router.get("/login/:id", function (req, res, next) {
@@ -141,7 +142,7 @@ router.get("/login/:id", function (req, res, next) {
         throw new Error("Neispravan poziv");
     }
 
-    // PROVJERA JE LI KORISNIK UPISAN
+    
 
     const checkStmt1 = db.prepare("SELECT count(*) FROM login WHERE id_user = ? AND id_competition = ?;");
     const checkResult1 = checkStmt1.get(req.user.sub, req.params.id);
@@ -151,7 +152,6 @@ router.get("/login/:id", function (req, res, next) {
     }
     else {
 
-        // UPIS U BAZU
 
         const stmt = db.prepare("INSERT INTO login (id_user, id_competition) VALUES (?, ?);");
         const updateResult = stmt.run(req.user.sub, req.params.id);
@@ -163,8 +163,6 @@ router.get("/login/:id", function (req, res, next) {
         }
     }
 });
-
-// ZADATAK 2
 
 // GET /competitions/score_input/:id
 
@@ -187,7 +185,8 @@ const schema_score = Joi.object({
     score: Joi.number().min(1).max(50).required()
 });
 
-// POST /competitions/score_change/
+// POST /competitions/score_change
+
 router.post("/score_change", authRequired, function (req, res, next) {
     // do validation
     const result = schema_score.validate(req.body);
@@ -204,6 +203,33 @@ router.post("/score_change", authRequired, function (req, res, next) {
     } else {
         res.render("competitions/form", { result: { database_error: true } });
     }
+});
+
+
+// GET /competitions/leaderbaord/:id
+
+router.get("/leaderboard/:id", function (req, res, next) {
+
+    const stmt = db.prepare(`
+        SELECT u.name AS natjecatelj, l.score, l.id_user
+        FROM competitions c, users u, login l
+        WHERE l.id_user = u.id AND l.id_competition = c.id AND l.id_competition = ?
+        ORDER BY l.score DESC;
+    `);
+
+    const result = stmt.all(req.params.id);
+
+    console.log(result);
+
+    const stmt1 = db.prepare(`
+        SELECT name AS natjecanje, apply_till AS datum
+        FROM competitions
+        WHERE id = ?
+    `);
+
+    const data = stmt1.all(req.params.id);
+
+    res.render("competitions/leaderboard", { layout:'noheader' ,result: { items: result, data}, data: { items: data}});
 });
 
 module.exports = router;

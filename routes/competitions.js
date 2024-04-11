@@ -31,7 +31,6 @@ router.get("/delete/:id", adminRequired, function (req, res, next) {
         throw new Error("Neispravan poziv");
     }
 
-
     const checkStmt1 = db.prepare("SELECT count(*) FROM login WHERE id_competition = ?");
     const checkResult1 = checkStmt1.get(req.params.id);
 
@@ -141,7 +140,6 @@ router.get("/login/:id", function (req, res, next) {
         throw new Error("Neispravan poziv");
     }
 
-    
 
     const checkStmt1 = db.prepare("SELECT count(*) FROM login WHERE id_user = ? AND id_competition = ?;");
     const checkResult1 = checkStmt1.get(req.user.sub, req.params.id);
@@ -203,7 +201,6 @@ router.post("/score_change", authRequired, function (req, res, next) {
         res.render("competitions/form", { result: { database_error: true } });
     }
 });
-
 
 // GET /competitions/leaderbaord/:id
 

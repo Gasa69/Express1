@@ -1,0 +1,54 @@
+<div class="p-2">
+
+  <div class="overflow-x-auto">
+    <table class="table">
+
+      <thead>
+        <tr>
+          <th>Pitanje</th>
+          <th>Odgovor</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each result.items}}
+
+
+
+        <form method="post" action="/competitions/list_q" class="flex flex-col gap-2">
+          <tr>
+            <th>{{this.q1}}</th>
+            <td><input type="text" placeholder="Unesite Odgovor" name="r1"
+                class="input input-bordered w-full max-w-xs" /></td>
+          </tr>
+
+          <tr>
+            <th>{{this.q2}}</th>
+            <td><input type="text" placeholder="Unesite Odgovor" name="r2"
+                class="input input-bordered w-full max-w-xs" /></td>
+          </tr>
+
+          <tr>
+            <th>{{this.q3}}</th>
+            <td><input type="text" placeholder="Unesite Odgovor" name="r3"
+                class="input input-bordered w-full max-w-xs" /></td>
+          </tr>
+
+          <tr>
+            <th>{{this.q4}}</th>
+            <td><input type="text" placeholder="Unesite Odgovor" name="r4"
+                class="input input-bordered w-full max-w-xs" /></td>
+          </tr>
+
+          <tr>
+            <th>{{this.q5}}</th>
+            <td><input type="text" placeholder="Unesite Odgovor" name="r5"
+                class="input input-bordered w-full max-w-xs" /></td>
+          </tr>
+          <input type="hidden" name="id" value="{{this.login_id}}" />
+          <td>{{> form_buttons }}</td>
+        </form>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="p-2">
+
+  <div class="overflow-x-auto">
+    <table class="table">
+      <tbody>
+        {{#each result.items}}
+        <form method="post" action="/competitions/list_q" class="flex flex-col gap-2">
+          <h1 class="text-5xl font-bold gap-5">Pitanja i Odgovori</h1>
+          <div class="flex flex-col">
+            <label>{{this.q1}}</label>
+            <input type="text" name="r1" placeholder="Unesite odgovor" class="bg-neutral" />
+          </div>
+          <div class="flex flex-col">
+            <label>{{this.q2}}</label>
+            <input type="text" name="r2" placeholder="Unesite odgovor" class="bg-neutral" />
+          </div>
+          <div class="flex flex-col">
+            <label>{{this.q3}}</label>
+            <input type="text" name="r3" placeholder="Unesite odgovor" class="bg-neutral" />
+          </div>
+          <div class="flex flex-col">
+            <label>{{this.q4}}</label>
+            <input type="text" name="r4" placeholder="Unesite odgovor" class="bg-neutral" />
+          </div>
+          <div class="flex flex-col">
+            <label>{{this.q5}}</label>
+            <input type="text" name="r5" placeholder="Unesite odgovor" class="bg-neutral" />
+          </div>
+          <div>
+            <input type="hidden" name="id" value="{{this.id}}" />
+          </div>
+          {{> form_buttons }}
+        </form>
+        {{/each}}
+
+        {{#if result.validation_error}}
+        {{> validation_error }}
+        {{/if}}
+
+        {{#if result.database_error}}
+        {{> database_error }}
+        {{/if}}
+
+        {{#if result.success}}
+        <div class="mt-4">
+          <div class="card w-96 bg-primary text-primary-content">
+            <div class="card-body">
+              <h2 class="card-title">Uspjeh!</h2>
+              <p>
+                Odgovorili ste na sva pitanja! Vaši odgovori su spremljeni.
+              </p>
+              <div class="card-actions justify-end">
+                <a class="btn" href="/competitions">Nastavi na pregled natjecanja</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+      </tbody>
+    </table>
+  </div>
+</div>

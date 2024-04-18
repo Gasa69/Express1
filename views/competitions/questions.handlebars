@@ -1,0 +1,55 @@
+<div class="p-2">
+    {{#if result.display_form}}
+
+    <form method="post" action="/competitions/questions" class="flex flex-col gap-2">
+        <h1 class="text-5xl font-bold gap-5">Pitanja</h1>
+        <div class="flex flex-col">
+            <label>1. Pitanje</label>
+            <input type="text" name="q1" placeholder="Unesite pitanje" class="bg-neutral" />
+        </div>
+        <div class="flex flex-col">
+            <label>2. Pitanje </label>
+            <input type="text" name="q2" placeholder="Unesite pitanje" class="bg-neutral" />
+        </div>
+        <div class="flex flex-col">
+            <label>3. Pitanje</label>
+            <input type="text" name="q3" placeholder="Unesite pitanje" class="bg-neutral" />
+        </div>
+        <div class="flex flex-col">
+            <label>4. Pitanje</label>
+            <input type="text" name="q4" placeholder="Unesite pitanje" class="bg-neutral" />
+        </div>
+        <div class="flex flex-col">
+            <label>5. Pitanje</label>
+            <input type="text" name="q5" placeholder="Unesite pitanje" class="bg-neutral" />
+        </div>
+        {{> form_buttons }}
+    </form>
+    {{/if}}
+
+    {{#if result.validation_error}}
+    {{> validation_error }}
+    {{/if}}
+
+    {{#if result.database_error}}
+    {{> database_error }}
+    {{/if}}
+
+    {{#if result.email_in_use}}
+    {{> email_in_use}}
+    {{/if}}
+
+    {{#if result.success}}
+    <div class="mt-4">
+        <div class="card w-96 bg-primary text-primary-content">
+            <div class="card-body">
+                <h2 class="card-title">Uspjeh!</h2>
+                <p>
+                    Uspješno ste dodali pitanja!
+                </p>
+                <div class="card-actions justify-end"></div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>
